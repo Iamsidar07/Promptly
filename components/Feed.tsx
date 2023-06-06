@@ -29,6 +29,7 @@ export const PromptCardList = ({ isLoading, data, handleTagClick, handleDelete, 
           data={item}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handleTagClick={handleTagClick}
         />)
       }
     </div>
@@ -71,13 +72,6 @@ const Feed = () => {
     const resultFilteredPosts = posts.filter((post) => post.prompt.toLowerCase().includes(searchValue.toLowerCase()) || post.tags.includes(searchValue.toLowerCase()) || post.creator.username.toLowerCase().includes(searchValue.toLowerCase()) );
     setSearchResultPosts(resultFilteredPosts)
  }, [searchValue,posts])
-
- //write a function to search by username,prompt, or tag
-  //filter the posts based on the search value
-  //if the search value is empty, return all posts
-  //if the search value is not empty, return the posts that match the search value
-
-
 
   return (
     <section className='w-full flex flex-col items-center mt-6 mb-12'>

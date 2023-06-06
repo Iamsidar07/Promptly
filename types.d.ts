@@ -15,3 +15,9 @@ interface Creator  {
     username: string;
     email: string;
 }
+
+export interface Params {
+    params:{
+        id: string;
+    }
+}

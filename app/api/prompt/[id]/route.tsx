@@ -1,9 +1,10 @@
 import Prompt from "@/models/Prompt";
+import { Params } from "@/types";
 import { connectToDatabase } from "@/utils/database";
 import { NextRequest } from "next/server";
 
 
-export const GET = async (req: NextRequest, { params }) => {
+export const GET = async (req: NextRequest, { params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();

@@ -2,7 +2,7 @@ import User from "@/models/User";
 import { connectToDatabase } from "@/utils/database"
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request,params) => {
+export const GET = async (req: Request) => {
     const { email } = await req.json();
     try {
         await connectToDatabase();

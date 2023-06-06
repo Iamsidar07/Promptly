@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react'
 import { PromptCardList } from './Feed';
-import { usePathname } from 'next/navigation';
 import ProfileSkeleton from './ProfileSkeleton';
 
 
@@ -11,13 +10,12 @@ type ProfileProps = {
   isLoading?: boolean,
   userDetails: Creator | any,
   data: Post[],
-  handleTagClick?: (tag: string) => void,
   handleDelete?: (id: string) => void,
   handleEdit?: (id: string) => void,
 }
 
-const Profile = ({ userDetails, isLoading, data, handleDelete, handleEdit, handleTagClick, }: ProfileProps) => {
-  const { data: session } = useSession();
+const Profile = ({ userDetails, isLoading, data, handleDelete, handleEdit }: ProfileProps) => {
+
 
   return (
     <section className='w-full'>

@@ -1,8 +1,7 @@
-import  NextAuth, { Profile } from "next-auth";
+import  NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import User from "@/models/User";
 import { connectToDatabase } from "@/utils/database";
-
 
 
 const handler = NextAuth({
@@ -14,20 +13,23 @@ const handler = NextAuth({
     ],
     callbacks:{
         async session({ session }) {
-            const sessionUser = await User.findOne({ email: session?.user.email });
-            session.user.id = sessionUser._id.toString();
+            if (session?.user) {
+                
+                const sessionUser = await User.findOne({ email: session?.user.email });
+                session.user.id = sessionUser._id.toString();
+            }
             return session;
         },
-        async signIn({ profile }: Profile) {
+        async signIn({ profile }): Promise<boolean> {
             try {
                 await connectToDatabase();
                 //check if the user exists
-                const isUserExists = await User.findOne({ email: profile.email });
-                if (!isUserExists) {
+                const isUserExists = await User.findOne({ email: profile?.email });
+                if (!isUserExists && profile?.email) {
                     //create user
-                    const image = `https://api.multiavatar.com/${profile.name}.svg`
+                    const image = `https://api.multiavatar.com/${profile?.name}.svg`
                     await User.create({
-                        username: profile.twitter_username,
+                        username: profile.name?.replace(' ','').toLowerCase(),
                         email: profile.email,
                         image,
                     });

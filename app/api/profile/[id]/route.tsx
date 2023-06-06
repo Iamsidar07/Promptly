@@ -1,8 +1,9 @@
 import User from "@/models/User";
+import { Params } from "@/types";
 import { connectToDatabase } from "@/utils/database"
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, { params }) => {
+export const GET = async (req: Request, { params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();

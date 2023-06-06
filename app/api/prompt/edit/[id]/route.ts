@@ -1,8 +1,9 @@
 import PromptModel from "@/models/Prompt";
+import { Params } from "@/types";
 import { connectToDatabase } from "@/utils/database";
 import { NextResponse } from "next/server";
 //Get (reads prompt)
-export const GET = async (req: Request,{ params }) => {
+export const GET = async (req: Request,{ params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();
@@ -17,7 +18,7 @@ export const GET = async (req: Request,{ params }) => {
     }
 }
 // PATCH (updates prompt)
-export const PATCH = async (req: Request,{ params }) => {
+export const PATCH = async (req: Request,{ params }: Params) => {
     const {tags, prompt} =  await req.json();
     const { id } = params;
     try {
@@ -32,7 +33,7 @@ export const PATCH = async (req: Request,{ params }) => {
 }
 
 // DELETE (deletes prompt)
-export const DELETE = async (req: Request, { params }) => {
+export const DELETE = async (req: Request, { params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();
