@@ -51,7 +51,7 @@ const Nav = (props: Props) => {
                   alt='Profile Picture'
                   width={27}
                   height={27}
-                  className='cursor-pointer objcet-contain'
+                  className='cursor-pointer objcet-contain rounded-full'
                 />
               </Link>
 
