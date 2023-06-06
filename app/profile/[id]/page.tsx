@@ -2,37 +2,37 @@
 import Profile from '@/components/Profile'
 import { Creator, Post } from '@/types'
 import { NextPage } from 'next'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-type Props = {}
-
-const MyProfile: NextPage = (props: Props) => {
+const MyProfile: NextPage = () => {
     const { id } = useParams();
-    console.log(id);
-    const router = useRouter();
     const [posts, setPosts] = useState<Post[]>([]);
     const [user, setUser] = useState<Creator>();
-    console.log({ posts })
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            const res = await fetch(`/api/prompt/${id}`)
-            const data = await res.json()
-            console.log(data)
-            setPosts(data)
+
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                const promptRes = await fetch(`/api/prompt/${id}`);
+                const profileRes = await fetch(`/api/profile/${id}`)
+                const promptdata = await promptRes.json();
+                const profiledata = await profileRes.json();
+                setPosts(promptdata);
+                setUser(profiledata);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
         }
-        const fetchUser = async () => {
-            const res = await fetch(`/api/profile/${id}`)
-            const data = await res.json()
-            console.log(data)
-            setUser(data)
-        }
-        fetchUser();
-        fetchPosts()
-    }, [])
+        fetchData();
+    }, [id])
     return (
         <Profile
+            isLoading={isLoading}
             userDetails={user}
             data={posts}
         />

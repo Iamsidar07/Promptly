@@ -4,11 +4,11 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 
 interface PromptCardProps {
   data:Post;
-  handleTagClick: (tag: string) => void;
+  handleTagClick?: (tag: string) => void;
   handleEdit?: (id: string) => void;
   handleDelete?: (id: string) => void;
 }
@@ -53,7 +53,7 @@ const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardP
       <p className='mb-2 px-2.5'>{data.prompt}</p>
       <div className='px-2 flex flex-wrap gap-2'>
         {
-          data.tags.split(',').map((tag) => <span key={tag} onClick={()=>handleTagClick(tag)} className='rounded-full border-[0.3px] border-orange-400 bg-orange-200 px-2 py-0.5 text-xs cursor-pointer'>#{tag}</span>)
+          data.tags.split(',').map((tag) => <span key={tag} onClick={()=>handleTagClick && handleTagClick(tag)} className='rounded-full border-[0.3px] border-orange-400 bg-orange-200 px-2 py-0.5 text-xs cursor-pointer'>#{tag}</span>)
         }
       </div>
       {

@@ -1,22 +1,22 @@
 'use client'
 import Profile from '@/components/Profile'
 import { Post } from '@/types'
-import { NextPage } from 'next'
+import { Metadata, NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-type Props = {}
+
+export const metadata: Metadata = {
+  title: 'My Profile',
+}
 
 
-const MyProfile:NextPage = (props: Props) => {
+const MyProfile:NextPage = () => {
   const {data: session} = useSession();
   const router = useRouter();
   const [posts, setPosts] = useState<Post[]>([]);
-  console.log({posts})
-  const handleTagClick = (tag: string) => {}
   const handleDelete = async(id: string) => {
-    console.log({id});
     const isConfirmed = confirm('🗑️ Are you sure you want to delete this prompt?');
     if (!isConfirmed) return;
     try {
@@ -24,13 +24,11 @@ const MyProfile:NextPage = (props: Props) => {
         method:'DELETE'
       })
       const data = await res.json();
-      console.log({data});
     } catch (error) {
       console.log(error)
     }
   }
   const handleEdit = (id: string) => {
-    console.log({id});
     router.push(`/edit-prompt?id=${id}`);
   }
   useEffect(() => {
@@ -46,7 +44,7 @@ const MyProfile:NextPage = (props: Props) => {
    <Profile
    userDetails={session?.user}
    data={posts}
-   handleTagClick={handleTagClick}
+   isLoading={!posts.length}
    handleEdit={handleEdit}
    handleDelete={handleDelete}
    />

@@ -19,7 +19,6 @@ const EditPrompt: NextPage = (props: Props) => {
         prompt: '',
         tags: ''
     });
-    console.log({ userId: session?.user.id })
 
     useEffect(() => {
         const fetchPost = async () => {

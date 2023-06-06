@@ -2,27 +2,31 @@
 import React, { useEffect, useState } from 'react'
 import PromptCard from './PromptCard'
 import { Post } from '@/types';
+import PromptCardSkeleton from './PromptCardSkeleton';
 
 
 interface PromptCardListProps {
+  isLoading?: boolean;
   data: Post[];
-  handleTagClick: (tag: string) => void;
+  handleTagClick?: (tag: string) => void;
   handleEdit?: (id: string) => void;
   handleDelete?: (id: string) => void;
 }
 
-export const PromptCardList = ({ data, handleTagClick, handleDelete, handleEdit, }: PromptCardListProps) => {
+export const PromptCardList = ({ isLoading, data, handleTagClick, handleDelete, handleEdit, }: PromptCardListProps) => {
 
-  if (data.length === 0) {
-    return (<></>)
-  }
   return (
-    <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 '>
+    <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 mb-12 '>
+      {
+        isLoading && Array(8).fill(0).map((_,i)=>{
+          return <PromptCardSkeleton key={i}/>
+        })
+      }
+      
       {
         data.map((item, i) => <PromptCard
           key={item._id}
           data={item}
-          handleTagClick={handleTagClick}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />)
@@ -35,12 +39,21 @@ const Feed = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchResultPosts,setSearchResultPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading,setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/prompt')
-      const data = await res.json()
-      setPosts(data)
+      setIsLoading(true);
+      try {
+        const res = await fetch('/api/prompt')
+        const data = await res.json()
+        setPosts(data)
+      } catch (error) {
+        console.log(error);
+      }finally{
+        setIsLoading(false);
+      }
+      
     }
     fetchPosts()
   }, [])
@@ -51,13 +64,11 @@ const Feed = () => {
  
  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(e.target.value)
     setSearchValue(e.target.value);
  }
 
  useEffect(() => {
     const resultFilteredPosts = posts.filter((post) => post.prompt.toLowerCase().includes(searchValue.toLowerCase()) || post.tags.includes(searchValue.toLowerCase()) || post.creator.username.toLowerCase().includes(searchValue.toLowerCase()) );
-    console.log({resultFilteredPosts})
     setSearchResultPosts(resultFilteredPosts)
  }, [searchValue,posts])
 
@@ -80,6 +91,7 @@ const Feed = () => {
         />
       </form>
       <PromptCardList 
+      isLoading={isLoading}
       data={searchValue.length === 0 ? posts : searchResultPosts} 
       handleTagClick={handleTagClick} />
     </section>

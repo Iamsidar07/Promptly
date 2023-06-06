@@ -4,9 +4,11 @@ import Image from 'next/image';
 import React from 'react'
 import { PromptCardList } from './Feed';
 import { usePathname } from 'next/navigation';
+import ProfileSkeleton from './ProfileSkeleton';
 
 
 type ProfileProps = {
+  isLoading?: boolean,
   userDetails: Creator | any,
   data: Post[],
   handleTagClick?: (tag: string) => void,
@@ -14,11 +16,15 @@ type ProfileProps = {
   handleEdit?: (id: string) => void,
 }
 
-const Profile = ({ userDetails , data, handleDelete, handleEdit, handleTagClick, }: ProfileProps) => {
+const Profile = ({ userDetails, isLoading, data, handleDelete, handleEdit, handleTagClick, }: ProfileProps) => {
   const { data: session } = useSession();
-  console.log({userDetails})
+
   return (
     <section className='w-full'>
+      {
+        isLoading ? (
+          <ProfileSkeleton />
+        ) : (
       <div className='bg-gradient-radial from-orange-600 to-yellow-500 w-full h-36 rounded-t-md rounded-bl-md relative flex mb-20 -mt-10'>
         <div className='absolute -bottom-12 left-4 right-0 h-2/3 bg-white flex items-center rounded-lg rounded-tr-none space-x-4 shadow'>
           <Image
@@ -40,18 +46,22 @@ const Profile = ({ userDetails , data, handleDelete, handleEdit, handleTagClick,
             <p className='text-sm text-gray-800'>{userDetails?.email}</p>
           </div>
         </div>
-        
-      </div>
 
-      <PromptCardList 
-      data={data} 
-      handleTagClick={console.log}
-      handleDelete={handleDelete}
-      handleEdit={handleEdit} 
+      </div>
+        )
+      }
+
+
+
+      <PromptCardList
+        isLoading={isLoading}
+        data={data}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
       />
 
-      
-        
+
+
     </section>
   )
 }

@@ -11,9 +11,6 @@ const Nav = (props: Props) => {
   const [providers, setProviders] = useState<any>(null);
   const [isToggleDropDown, setIsToggleDropDown] = useState<boolean>(false);
   const isUserLoggedIn = session?.user ? true : false;
-  console.log({ isUserLoggedIn })
-
-  console.log('session from nav', session);
 
   useEffect(() => {
     const setupProviders = async () => {

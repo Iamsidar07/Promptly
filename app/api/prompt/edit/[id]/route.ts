@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 //Get (reads prompt)
 export const GET = async (req: Request,{ params }) => {
     const { id } = params;
-    console.log({id})
     try {
         await connectToDatabase();
         const prompt = await PromptModel.findById(id).populate('creator');

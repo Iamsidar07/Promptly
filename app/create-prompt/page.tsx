@@ -17,7 +17,6 @@ const CreatePrompt: NextPage = (props: Props) => {
         prompt: '',
         tags: ''
     });
-    console.log({userId:session?.user.id})
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
