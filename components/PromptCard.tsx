@@ -32,8 +32,8 @@ const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardP
       <div className="flex mb-2 items-center px-2 justify-between">
         <Link href={`/profile/${data?.creator._id}?username=${data?.creator.username}`} className="flex space-x-2  items-center ">
           <Image src={data.creator.image}
-            width={20}
-            height={20}
+            width={27}
+            height={27}
             alt='User image'
             className='object-contain bg-white rounded-full shadow'
           />

@@ -21,7 +21,7 @@ const Nav = (props: Props) => {
   }, [])
 
   return (
-    <nav className='border bg-white/50 backdrop-blur sticky top-0 z-50 mb-16 '>
+    <nav className='border bg-white/30 backdrop-blur-sm sticky top-0 z-50 mb-16 '>
       <div className='w-full flex items-center justify-between p-2  max-w-6xl mx-auto'>
         <Link href={'/'} className='flex gap-2 items-center'>
           <Image
@@ -31,14 +31,14 @@ const Nav = (props: Props) => {
             height={25}
             className='cursor-pointer objcet-contain'
           />
-          <p className='hidden sm:flex font-bold text-lg'>Promptly</p>
+          <p className='font-semibold text-lg'>Promptly</p>
         </Link>
 
         {/* Desktop Navigation  */}
         <div className='hidden sm:flex'>
           {
             isUserLoggedIn ? (<div className='flex gap-3 md:gap-5 items-center'>
-              <Link href={'/create-prompt'} className='text-white shadow-lg bg-gradient-to-r from-orange-700 to-yellow-500 cursor-pointer rounded-full py-2 px-5 md:px-7 hover:-rotate-6 hover:shadow hover:bg-transparent transition-all duration-150 ease-linear'>
+              <Link href={'/create-prompt'} className='text-white shadow-lg bg-gradient-to-r from-orange-700 to-yellow-500 cursor-pointer rounded-full py-2 px-5 md:px-7  hover:opacity-75 hover:bg-transparent transition-all duration-150 ease-linear'>
                 Create Prompt
               </Link>
               <button type='button' className='bg-white cursor-pointer rounded-full border py-2 px-5  hover:bg-black hover:text-white transition-all duration-150 ease-in'
@@ -79,7 +79,7 @@ const Nav = (props: Props) => {
               alt='Profile Picture'
               width={30}
               height={30}
-              className='cursor-pointer bg-yellow-500 shadow p-[0.5px] rounded-full objcet-contain'
+              className='cursor-pointer shadow rounded-full objcet-contain'
               onClick={() => {
                 setIsToggleDropDown((prevState) => !prevState);
               }}

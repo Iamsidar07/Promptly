@@ -1,5 +1,4 @@
 import { Creator, Post } from '@/types'
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react'
 import { PromptCardList } from './Feed';
