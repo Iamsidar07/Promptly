@@ -41,10 +41,9 @@ const Form = ({ type, handleSubmit, isSubmitting, post, setPost }: FormProps) =>
           placeholder='web development, coding, programming'
         />
         <div className='flex justify-end items-center space-x-2'>
-          <Link href='/' passHref>
-            <a className='bg-white cursor-pointer rounded-full border py-1.5 px-6 hover:bg-black hover:text-white transition-all duration-150 ease-in'>
-              Cancel
-            </a>
+          <Link href='/' className='bg-white cursor-pointer rounded-full border py-1.5 px-6 hover:bg-black hover:text-white transition-all duration-150 ease-in'>
+            Cancel
+
           </Link>
           <button
             type='submit'

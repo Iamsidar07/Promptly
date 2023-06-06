@@ -81,7 +81,7 @@ const Feed = () => {
           value={searchValue}
           required
           spellCheck={false}
-          placeholder='Search by username or prompt...'
+          placeholder='Search by username, tag or prompt...'
         />
       </form>
       <PromptCardList 
