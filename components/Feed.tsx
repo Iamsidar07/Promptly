@@ -24,7 +24,7 @@ export const PromptCardList = ({ isLoading, data, handleTagClick, handleDelete, 
       }
       
       {
-        data.map((item, i) => <PromptCard
+        data?.map((item, i) => <PromptCard
           key={item._id}
           data={item}
           handleEdit={handleEdit}
