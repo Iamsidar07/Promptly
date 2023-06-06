@@ -1,16 +1,10 @@
 'use client'
 import Profile from '@/components/Profile'
 import { Post } from '@/types'
-import { Metadata, NextPage } from 'next'
+import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-
-
-export const metadata: Metadata = {
-  title: 'My Profile',
-}
-
 
 const MyProfile:NextPage = () => {
   const {data: session} = useSession();
