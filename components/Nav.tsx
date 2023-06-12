@@ -22,7 +22,7 @@ const Nav = (props: Props) => {
 
   return (
     <nav className='border bg-white/30 backdrop-blur-sm sticky top-0 z-50 mb-16 '>
-      <div className='w-full flex items-center justify-between p-2  max-w-6xl mx-auto'>
+      <div className='w-full flex items-center justify-between p-3  max-w-6xl mx-auto'>
         <Link href={'/'} className='flex gap-2 items-center'>
           <Image
             src={'/assets/icons/terminal.svg'}
