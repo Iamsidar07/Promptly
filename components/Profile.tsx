@@ -1,20 +1,10 @@
-import { Creator, Post } from '@/types'
+import { ProfileProps } from '@/types';
 import Image from 'next/image';
-import React from 'react'
 import { PromptCardList } from './Feed';
 import ProfileSkeleton from './ProfileSkeleton';
 
 
-type ProfileProps = {
-  isLoading?: boolean,
-  userDetails: Creator | any,
-  data: Post[],
-  handleDelete?: (id: string) => void,
-  handleEdit?: (id: string) => void,
-}
-
 const Profile = ({ userDetails, isLoading, data, handleDelete, handleEdit }: ProfileProps) => {
-
 
   return (
     <section className='w-full'>
@@ -43,24 +33,17 @@ const Profile = ({ userDetails, isLoading, data, handleDelete, handleEdit }: Pro
             <p className='text-sm text-gray-800'>{userDetails?.email}</p>
           </div>
         </div>
-
       </div>
         )
       }
-
-
-
       <PromptCardList
         isLoading={isLoading}
         data={data}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
-
-
-
     </section>
   )
 }
 
-export default Profile
+export default Profile;

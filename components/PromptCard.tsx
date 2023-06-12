@@ -1,23 +1,15 @@
 'use client'
-import { Post } from '@/types';
+import { PromptCardProps } from '@/types';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react'
-
-interface PromptCardProps {
-  data:Post;
-  handleTagClick?: (tag: string) => void;
-  handleEdit?: (id: string) => void;
-  handleDelete?: (id: string) => void;
-}
+import { useState } from 'react';
 
 const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardProps) => {
   const {data:session} = useSession();
   const path = usePathname();
   const [isCopied,setIsCopied] = useState(false);
-
 
   const copyToClipboard = (prompt: string) => {
     navigator.clipboard.writeText(prompt);
@@ -39,7 +31,6 @@ const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardP
           />
           <span className='font-semibold'>@{data.creator.username}</span>
         </Link>
-
           <Image src={`/assets/icons/${isCopied ? 'tick' : 'copy'}.svg`}
             width={16}
             height={16}
@@ -49,7 +40,6 @@ const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardP
           />
       </div>
       <div className='border-b '></div>
-      
       <p className='mb-2 px-2.5'>{data.prompt}</p>
       <div className='px-2 flex flex-wrap gap-2'>
         {
@@ -62,12 +52,10 @@ const PromptCard = ({data,handleDelete, handleEdit, handleTagClick}: PromptCardP
           <button className='bg-white border text-gray-800 rounded-full px-4 py-1 text-sm ' onClick={() =>handleEdit &&  handleEdit(data._id)}>Edit</button>
           <button className='bg-orange-500 text-white rounded-full px-4 py-1 text-sm ' onClick={() =>handleDelete &&  handleDelete(data._id)}>Delete</button>
         </div>
-        </div> 
-          
+        </div>    
       }
-      
     </div>
   )
 }
 
-export default PromptCard
+export default PromptCard;

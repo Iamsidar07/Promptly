@@ -1,16 +1,14 @@
 'use client'
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-type Props = {}
 
-const Nav = (props: Props) => {
+const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState<any>(null);
   const [isToggleDropDown, setIsToggleDropDown] = useState<boolean>(false);
-  const isUserLoggedIn = session?.user ? true : false;
+  const isUserLoggedIn = (session?.user) ? true : false;
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -18,7 +16,7 @@ const Nav = (props: Props) => {
       setProviders(response);
     }
     setupProviders();
-  }, [])
+  }, []);
 
   return (
     <nav className='border bg-white/30 backdrop-blur-sm sticky top-0 z-50 mb-16 '>
@@ -128,4 +126,4 @@ const Nav = (props: Props) => {
   )
 }
 
-export default Nav
+export default Nav;

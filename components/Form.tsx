@@ -1,12 +1,13 @@
 import { Prompt } from '@/types';
 import Link from 'next/link';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 
 interface FormProps {
   type: string;
   post: Prompt;
-  setPost: React.Dispatch<React.SetStateAction<Prompt>>;
+  setPost: Dispatch<SetStateAction<Prompt>>;
   isSubmitting: boolean;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 const Form = ({ type, handleSubmit, isSubmitting, post, setPost }: FormProps) => {
@@ -43,7 +44,6 @@ const Form = ({ type, handleSubmit, isSubmitting, post, setPost }: FormProps) =>
         <div className='flex justify-end items-center space-x-2'>
           <Link href='/' className='bg-white cursor-pointer rounded-full border py-1.5 px-6 hover:bg-black hover:text-white transition-all duration-150 ease-in'>
             Cancel
-
           </Link>
           <button
             type='submit'

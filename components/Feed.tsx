@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import PromptCard from './PromptCard'
+import { ChangeEvent, useEffect, useState } from 'react';
+import PromptCard from './PromptCard';
 import { Post } from '@/types';
 import PromptCardSkeleton from './PromptCardSkeleton';
 
@@ -18,11 +18,11 @@ export const PromptCardList = ({ isLoading, data, handleTagClick, handleDelete, 
   return (
     <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 mb-12 '>
       {
-        isLoading && Array(8).fill(0).map((_,i)=>{
-          return <PromptCardSkeleton key={i}/>
+        isLoading && Array(8).fill(0).map((_, i) => {
+          return <PromptCardSkeleton key={i} />
         })
       }
-      
+
       {
         data?.map((item, i) => <PromptCard
           key={item._id}
@@ -38,40 +38,43 @@ export const PromptCardList = ({ isLoading, data, handleTagClick, handleDelete, 
 
 const Feed = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResultPosts,setSearchResultPosts] = useState<Post[]>([]);
+  const [searchResultPosts, setSearchResultPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading,setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch('/api/prompt')
-        const data = await res.json()
-        setPosts(data)
+        const res = await fetch('/api/prompt');
+        const data = await res.json();
+        setPosts(data);
       } catch (error) {
         console.log(error);
-      }finally{
+      } finally {
         setIsLoading(false);
       }
-      
-    }
-    fetchPosts()
-  }, [])
+    };
+    fetchPosts();
+  }, []);
 
- const handleTagClick = (tag: string) => {
-    setSearchValue(tag)
- }
- 
- const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTagClick = (tag: string) => {
+    setSearchValue(tag);
+  }
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchValue(e.target.value);
- }
+  }
 
- useEffect(() => {
-    const resultFilteredPosts = posts.filter((post) => post.prompt.toLowerCase().includes(searchValue.toLowerCase()) || post.tags.includes(searchValue.toLowerCase()) || post.creator.username.toLowerCase().includes(searchValue.toLowerCase()) );
-    setSearchResultPosts(resultFilteredPosts)
- }, [searchValue,posts])
+  useEffect(() => {
+    const searchValLowerCase = searchValue.toLowerCase();
+    const resultFilteredPosts = posts.filter((post) => post.prompt.toLowerCase().includes(searchValLowerCase) ||
+      post.tags.includes(searchValLowerCase) ||
+      post.creator.username.toLowerCase().includes(searchValLowerCase)
+    );
+    setSearchResultPosts(resultFilteredPosts);
+  }, [searchValue, posts]);
 
   return (
     <section className='w-full flex flex-col items-center mt-6 mb-12'>
@@ -84,10 +87,11 @@ const Feed = () => {
           placeholder='Search by username, tag or prompt...'
         />
       </form>
-      <PromptCardList 
-      isLoading={isLoading}
-      data={searchValue.length === 0 ? posts : searchResultPosts} 
-      handleTagClick={handleTagClick} />
+      <PromptCardList
+        isLoading={isLoading}
+        data={searchValue.length === 0 ? posts : searchResultPosts}
+        handleTagClick={handleTagClick}
+      />
     </section>
   )
 }

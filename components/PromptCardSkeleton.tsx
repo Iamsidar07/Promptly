@@ -1,4 +1,3 @@
-
 const PromptCardSkeleton = () => {
     return (
         <div className='w-full max-w-md mx-auto bg-white rounded border py-2 space-y-2 shadow-sm sm:hover:scale-105 sm:hover:translate-y-1 hover:border-black transition-all duration-100 ease-in h-fit'>
@@ -14,7 +13,6 @@ const PromptCardSkeleton = () => {
                 <p className='mt-1 px-2.5 w-full h-5 bg-gray-400 animate-pulse'></p>
                 <p className='mt-1 px-2.5 w-full h-5 bg-gray-400 animate-pulse'></p>
             </div>
-
             <div className='px-2 flex flex-wrap gap-2'>
                 {
                     Array(6).fill(0).map((_, i) => <span key={i} className='rounded-full px-2 py-2 cursor-pointer bg-gray-400 animate-pulse w-12'></span>)
@@ -23,5 +21,4 @@ const PromptCardSkeleton = () => {
         </div>
     )
 }
-
-export default PromptCardSkeleton
+export default PromptCardSkeleton;

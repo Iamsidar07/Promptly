@@ -1,6 +1,6 @@
-import User from "@/models/User";
-import { connectToDatabase } from "@/utils/database"
-import { NextResponse } from "next/server";
+import User from '@/models/User';
+import { connectToDatabase } from '@/utils/database';
+import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request) => {
     const { email } = await req.json();
@@ -9,6 +9,7 @@ export const GET = async (req: Request) => {
         const user = User.findOne({ email });
         return NextResponse.json(user, { status: 200 });
     } catch (error) {
+        console.log(error);
         return NextResponse.json('Unable to fetch profile', { status: 500 });
         
     }
