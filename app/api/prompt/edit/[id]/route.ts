@@ -34,7 +34,7 @@ export const PATCH = async (req: Request, { params }: Params) => {
 }
 
 // DELETE (deletes prompt)
-export const DELETE = async ({ params }: Params) => {
+export const DELETE = async (req:Request,{ params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();
