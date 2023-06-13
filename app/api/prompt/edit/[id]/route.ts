@@ -4,7 +4,7 @@ import { connectToDatabase } from '@/utils/database';
 import { NextResponse } from 'next/server';
 
 //Get (reads prompt)
-export const GET = async ({ params }: Params) => {
+export const GET = async (req:Request,{ params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();

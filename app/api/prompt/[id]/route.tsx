@@ -2,7 +2,7 @@ import Prompt from '@/models/Prompt';
 import { Params } from '@/types';
 import { connectToDatabase } from '@/utils/database';
 
-export const GET = async ({ params }: Params) => {
+export const GET = async (req:Request, { params }: Params) => {
     const { id } = params;
     try {
         await connectToDatabase();

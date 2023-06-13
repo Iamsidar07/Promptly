@@ -1,12 +1,10 @@
 'use client'
 import { Profile } from '@/components';
 import { Creator, Post } from '@/types';
-import { NextPage } from 'next';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const MyProfile: NextPage = () => {
-    const { id } = useParams();
+const MyProfile = ({ params }: { params:{ id: string } }) => {
+    const { id } = params;
     const [posts, setPosts] = useState<Post[]>([]);
     const [user, setUser] = useState<Creator>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,7 +27,7 @@ const MyProfile: NextPage = () => {
         }
         fetchData();
     }, [id]);
-    
+
     return (
         <Profile
             isLoading={isLoading}
