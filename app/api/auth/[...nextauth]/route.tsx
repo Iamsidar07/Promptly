@@ -1,7 +1,7 @@
-import  NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import User from "@/models/User";
-import { connectToDatabase } from "@/utils/database";
+import  NextAuth from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
+import User from '@/models/User';
+import { connectToDatabase } from '@/utils/database';
 
 
 const handler = NextAuth({
@@ -14,7 +14,6 @@ const handler = NextAuth({
     callbacks:{
         async session({ session }) {
             if (session?.user) {
-                
                 const sessionUser = await User.findOne({ email: session?.user.email });
                 session.user.id = sessionUser._id.toString();
             }

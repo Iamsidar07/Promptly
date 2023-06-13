@@ -1,7 +1,3 @@
-import React from 'react'
-
-type Props = {}
-
 const ProfileSkeleton = () => {
   return (
       <div className='bg-gradient-radial from-orange-600 to-yellow-500 w-full h-36 rounded-t-md rounded-bl-md relative flex mb-20 -mt-10'>
@@ -17,4 +13,4 @@ const ProfileSkeleton = () => {
   )
 }
 
-export default ProfileSkeleton
+export default ProfileSkeleton;

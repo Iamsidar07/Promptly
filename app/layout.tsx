@@ -22,9 +22,6 @@ export default function RootLayout({
   
   return (
     <html lang='en'>
-      <head>
-        <link rel="shortcut icon" href="/assets/icons/terminal.svg" type="image/x-icon/svg" />
-      </head>
       <body>
         <Provider session={session}>
           <div className='main'>
